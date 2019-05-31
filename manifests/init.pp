@@ -117,6 +117,7 @@ class nginx (
   $keepalive_timeout                                         = '65s',
   $keepalive_requests                                        = '100',
   $log_format                                                = {},
+  $stream_log_format                                         = {},
   Boolean $mail                                              = false,
   Variant[String, Boolean] $mime_types_path                  = 'mime.types',
   Boolean $stream                                            = false,
