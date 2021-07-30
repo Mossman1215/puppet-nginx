@@ -648,7 +648,7 @@ describe 'nginx' do
                 title: 'should set stream custom log format',
                 attr: 'stream_format_log',
                 value: 'mycustomformat',
-                match: '  stream_access_log /var/log/nginx/access.log mycustomformat;'
+                match: '  access_log /var/log/nginx/access.log mycustomformat;'
               },
               {
                 title: 'should set sendfile',
