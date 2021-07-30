@@ -574,8 +574,8 @@ describe 'nginx' do
                   'format2' => 'FORMAT2'
                 },
                 match: [
-                  '  stream_log_format format1 \'FORMAT1\';',
-                  '  stream_log_format format2 \'FORMAT2\';'
+                  '  log_format format1 \'FORMAT1\';',
+                  '  log_format format2 \'FORMAT2\';'
                 ]
               },
               {
