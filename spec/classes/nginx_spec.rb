@@ -634,8 +634,8 @@ describe 'nginx' do
                 attr: 'stream_access_log',
                 value: ['/path/to/access.log', 'syslog:server=localhost'],
                 match: [
-                  '  stream_access_log /path/to/access.log;',
-                  '  stream_access_log syslog:server=localhost;'
+                  '  access_log /path/to/access.log;',
+                  '  access_log syslog:server=localhost;'
                 ]
               },
               {
