@@ -567,6 +567,33 @@ describe 'nginx' do
                 notmatch: %r{log_format}
               },
               {
+                title: 'should set stream log formats',
+                attr: 'stream_log_format',
+                value: {
+                  'format1' => 'FORMAT1',
+                  'format2' => 'FORMAT2',
+                  'format3' => {
+                    'format' => 'FORMAT3',
+                  },
+                  'format4' => {
+                    'escape' => 'json',
+                    'format' => '{"response": $status, "verb": "$request_method"}',
+                  },
+                },
+                match: [
+                  '  log_format format1 "FORMAT1";',
+                  '  log_format format2 "FORMAT2";',
+                  '  log_format format3 "FORMAT3";',
+                  '  log_format format4 escape=json "{\\"response\\": $status, \\"verb\\": \\"$request_method\\"}";'
+                ]
+              },
+              {
+                title: 'should not set stream log formats',
+                attr: 'stream_log_format',
+                value: {},
+                notmatch: %r{stream_log_format}
+              },
+              {
                 title: 'should set multi_accept',
                 attr: 'multi_accept',
                 value: 'on',
@@ -606,10 +633,31 @@ describe 'nginx' do
                 ]
               },
               {
+                title: 'should set stream access_log',
+                attr: 'stream_access_log',
+                value: '/path/to/access.log',
+                match: '  stream_access_log /path/to/access.log;'
+              },
+              {
+                title: 'should set multiple stream access_logs',
+                attr: 'stream_access_log',
+                value: ['/path/to/access.log', 'syslog:server=localhost'],
+                match: [
+                  '  stream_access_log /path/to/access.log;',
+                  '  stream_access_log syslog:server=localhost;'
+                ]
+              },
+              {
                 title: 'should set custom log format',
                 attr: 'http_format_log',
                 value: 'mycustomformat',
                 match: '  access_log /var/log/nginx/access.log mycustomformat;'
+              },
+              {
+                title: 'should set stream custom log format',
+                attr: 'stream_format_log',
+                value: 'mycustomformat',
+                match: '  stream_access_log /var/log/nginx/access.log mycustomformat;'
               },
               {
                 title: 'should set sendfile',
