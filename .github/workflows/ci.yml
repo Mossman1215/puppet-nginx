@@ -4,7 +4,9 @@
 
 name: CI
 
-on: pull_request
+on:
+  - pull_request
+  - push
 
 concurrency:
   group: ${{ github.ref_name }}
@@ -15,4 +17,4 @@ jobs:
     name: Puppet
     uses: voxpupuli/gha-puppet/.github/workflows/beaker.yml@v1
     with:
-      pidfile_workaround: 'false'
+      pidfile_workaround: "false"
